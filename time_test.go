@@ -91,3 +91,32 @@ func TestDiff(t *testing.T) {
 		})
 	}
 }
+
+func TestRestructuredDate(t *testing.T) {
+	type args struct {
+		t time.Time
+	}
+
+	date, _ := time.Parse(`2006-01-02`, `2021-01-30`)
+	expected := 20210130
+
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "format_date",
+			args: args{t: date},
+			want: expected,
+		},
+	}
+	for _, test := range tests {
+		tt := test
+		t.Run(tt.name, func(t *testing.T) {
+			if got := RestructuredDate(tt.args.t); got != tt.want {
+				t.Errorf("RestructuredDate() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

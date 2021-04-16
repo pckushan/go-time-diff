@@ -49,3 +49,8 @@ func Diff(a, b time.Time) (years, months, days, weeks, fortNights, quarters int)
 	quarters = int(math.Ceil(float64(months) / QuarterMonths))
 	return years, months, days, weeks, fortNights, quarters
 }
+
+func RestructuredDate(t time.Time) int {
+	y, m, d := t.Date()
+	return y*10000 + int(m)*100 + d
+}
